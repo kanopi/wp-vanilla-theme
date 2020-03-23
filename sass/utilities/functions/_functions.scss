@@ -1,0 +1,97 @@
+// functions
+// For a functional codebase and life
+
+/// REM Calculator
+/// @param $size - Size in pixels. Needs to be entered as a unitless value
+/// Adjust the value that @param $size is devided by to your root font size.
+@function rem-calc($size) {
+	$rem-size: $size / 16;
+	@return #{$rem-size}rem;
+}
+
+/// Bears Breakpoints
+/// We use bears cause who doesn't love a bear.
+/// @param $key - the key from our $breakpoints variable map
+@function bear($key) {
+	@if map-has-key($bears, $key) {
+		@return map-get($bears, $key);
+	}
+	@return null;
+}
+
+/// default fonts
+/// @param $key - the key from our $default-fonts variable map
+@function fonts($key) {
+	@if map-has-key($default-fonts, $key) {
+		@return map-get($default-fonts, $key);
+	}
+	@return null;
+}
+
+/// font-weight
+/// @param $key - the key from our $font-weight variable map
+@function font-weight($key) {
+	@if map-has-key($font-weight, $key) {
+		@return map-get($font-weight, $key);
+	}
+	@return null;
+}
+
+/// shorthand for font-weight
+/// @param $key - the key from our $font-weight variable map
+@function fw($key) {
+	@return font-weight($key);
+}
+
+// Functions
+// Requires the calc-interpolation function which can also be used independently
+@function calc-interpolation($min-screen, $min-value, $max-screen, $max-value) {
+	$a: ($max-value - $min-value) / ($max-screen - $min-screen);
+	$b: $min-value - $a * $min-screen;
+
+	$sign: '+';
+	@if ($b < 0) {
+		$sign: '-';
+		$b: abs($b);
+	}
+	@return calc(#{$a*100}vw #{$sign} #{$b});
+}
+
+/// color-presets
+/// @param $key - the key from our $color-presets variable map
+@function color-preset($key) {
+	@if map-has-key($color-presets, $key) {
+		@return map-get($color-presets, $key);
+	}
+
+	// @warn 'Unknown `#{$key}` in $color-preset.';
+	@return null;
+}
+
+/// Mixin - Interpolate many.
+/// PRECISE CONTROL OVER RESPONSIVE TYPOGRAPHY/PROPERTIERS
+/// All numbers must use the same unit.
+/// @param number $min-vw - min viewport width to interpolate.
+/// @param number $max-vw - max vireport width to interpoloate.
+/// @param number $min-value - min value to scale too.
+/// @param number $max-value - the max value to scale too.
+/// @param list   $properties - what properties to interpolate.
+@mixin interpolate-many($min-screen, $max-screen, $min-value, $max-value, $properties...) {
+	& {
+		@each $property in $properties {
+			#{$property}: $min-value;
+		}
+
+		@media screen and (min-width: $min-screen) {
+			@each $property in $properties {
+				#{$property}: calc-interpolation($min-screen, $min-value, $max-screen, $max-value);
+			}
+		}
+
+		@media screen and (min-width: $max-screen) {
+			@each $property in $properties {
+				#{$property}: $max-value;
+			}
+		}
+	}
+}

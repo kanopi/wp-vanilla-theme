@@ -1,0 +1,149 @@
+// Rem output with px fallback
+@mixin font-size($sizeValue: 1) {
+	font-size: ($sizeValue * 16) * 1px;
+	font-size: $sizeValue * 1rem;
+}
+
+// Center block
+@mixin center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// Clearfix
+@mixin clearfix() {
+	content: '';
+	display: table;
+	table-layout: fixed;
+}
+
+// Clear after (not all clearfix need this also)
+@mixin clearfix-after() {
+	clear: both;
+}
+
+// Column width with margin
+@mixin column-width($numberColumns: 3) {
+	width: map-get($columns, $numberColumns) - (($columns__margin * ($numberColumns - 1)) / $numberColumns);
+}
+
+/// ie11
+/// A fallback to give ie11 support
+@mixin ie11 {
+	@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+		@content;
+	}
+}
+
+/// transitions
+/// A smooth transition from here to there.
+/// @param  string $property What will we transition today.
+/// @param  number $duration Duration of the transition
+/// @param  string $timing Transition-timing-function property specifies the speed curve of the transition effect.
+/// @param  number $delay Delay the transition.
+
+@mixin transition($property: all, $duration: .2s, $timing: ease-in-out, $delay: 0s) {
+	transition: $property $duration $timing $delay;
+}
+
+/// Mixin - Interpolate.
+/// PRECISE CONTROL OVER RESPONSIVE TYPOGRAPHY FOR SASS
+/// @param string $properties - the property to interpoloate.
+/// @param number $min-vw - min viewport width to interpolate.
+/// @param number $max-vw - max vireport width to interpoloate.
+/// @param number $min-value - min value to scale too.
+/// @param number $max-value - the max value to scale too.
+@mixin interpolate($properties, $min-screen, $max-screen, $min-value, $max-value) {
+	& {
+		@each $property in $properties {
+			#{$property}: $min-value;
+		}
+
+		@media screen and (min-width: $min-screen) {
+			@each $property in $properties {
+				#{$property}: calc-interpolation($min-screen, $min-value, $max-screen, $max-value);
+			}
+		}
+
+		@media screen and (min-width: $max-screen) {
+			@each $property in $properties {
+				#{$property}: $max-value;
+			}
+		}
+	}
+}
+
+/// Mixin - Interpolate many.
+/// PRECISE CONTROL OVER RESPONSIVE TYPOGRAPHY/PROPERTIERS
+/// All numbers must use the same unit.
+/// @param number $min-vw - min viewport width to interpolate.
+/// @param number $max-vw - max vireport width to interpoloate.
+/// @param number $min-value - min value to scale too.
+/// @param number $max-value - the max value to scale too.
+/// @param list   $properties - what properties to interpolate.
+@mixin interpolate-many($min-screen, $max-screen, $min-value, $max-value, $properties...) {
+	& {
+		@each $property in $properties {
+			#{$property}: $min-value;
+		}
+
+		@media screen and (min-width: $min-screen) {
+			@each $property in $properties {
+				#{$property}: calc-interpolation($min-screen, $min-value, $max-screen, $max-value);
+			}
+		}
+
+		@media screen and (min-width: $max-screen) {
+			@each $property in $properties {
+				#{$property}: $max-value;
+			}
+		}
+	}
+}
+
+/// Mixin - Center.
+/// Center an element vertically or horizontally in its container,
+/// and optionally horizontally. Option to undo.
+/// @param bool $horizonally-center - center horizontally
+/// @param bool $vertically-center - center vertically
+/// @param bool $absolute-positioning - position absolutely, rather than relatively
+/// @param bool $undo - undo vertical centering on an element it was previously applied to
+@mixin center($horizontally: true, $vertically: true, $absolute: false, $undo: false) {
+	display: block;
+	@if ($absolute) {
+		position: absolute;
+	} @else {
+		position: relative;
+	}
+	@if ($horizontally == true and $vertically == true) {
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+	}
+	@if ($vertically == true and $horizontally == false) {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	@if ($horizontally == true and $vertically == false) {
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	@if ($undo) {
+		position: static;
+		left: auto;
+		transform: none;
+	}
+}
+
+/// Mixin - prop.
+/// Create a css variable/property.
+/// We need this to work around a preprocessor bug that fails to build.
+/// When there are double dashes '--'
+/// @param string $prop - property name
+/// @param string $vaule - property value
+@mixin prop($prop: null, $value: null) {
+	@if ($prop and $value) {
+		#{$prop}: $value;
+	}
+}
