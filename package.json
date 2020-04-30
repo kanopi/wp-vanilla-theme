@@ -1,9 +1,9 @@
 {
-  "name": "kanopi",
+  "name": "Kanopi WordPress Starter Theme",
   "version": "1.0.0",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/kanopi/phr-org"
+    "type": "wordpress-theme-custom",
+    "url": "https://github.com/kanopi/wp-vanilla-theme"
   },
   "private": true,
   "dependencies": {
