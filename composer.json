@@ -1,0 +1,12 @@
+{
+    "name": "kanopi/wp-vanilla",
+    "description": "A WordPress starter theme for Kanopi Studios.",
+    "type": "wordpress-theme-custom",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Kanopi Studios",
+            "url": "https://kanopi.com/"
+        }
+    ],
+}
