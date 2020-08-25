@@ -23,12 +23,18 @@ requireDir('./tasks');
 /**
  * Global Tasks
  */
-gulp.task('compile','Runs all required compile tasks', tasks.compile);
-gulp.task('clean', 'Runs all required clean tasks', tasks.clean);
-gulp.task('validate', 'Runs all validation tasks, no exceptions', tasks.validate);
-gulp.task('watch', 'Runs default watches across the board', tasks.watch);
-gulp.task('build', '', ['clean', 'compile']);
+gulp.task('compile', gulp.series(tasks.compile));
+// compile.description = 'Runs all required compile tasks';
+gulp.task('clean', gulp.series(tasks.clean));
+// clean.description 'Runs all required clean tasks';
+gulp.task('validate', gulp.series(tasks.validate));
+// validate.description 'Runs all validation tasks, no exceptions';
+gulp.task('watch', gulp.parallel(tasks.watch));
+// watch.description 'Runs default watches across the board';
+gulp.task('build', '', gulp.series('clean', 'compile'));
+// build.description 'Runs default watches across the board';
+
 // gulp.task('default',  '', function () {
 //   runSequence('clean', 'compile', 'watch');
 // });
-gulp.task('default', ['compile', 'watch']);
+gulp.task('default', gulp.series('compile', 'watch'));

@@ -16,7 +16,8 @@ var browserSync = global.browserSync;
  * Operations
  ************************************************************/
 gulp.task('serve', 'Launch BrowserSync and expected file watchers to serve PatternLab',
-  ['compile', 'watch'],
+  // ['compile', 'watch'],
+  gulp.series('compile', 'watch'),
   function () {
 
     if (config.browserSync.domain) {

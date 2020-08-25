@@ -15,7 +15,8 @@ var browserSync = global.browserSync;
 /*************************************************************
  * Operations
  ************************************************************/
-gulp.task('js:compile', 'Compile & minify JS sources, with optional source maps', function () {
+ // 'Compile & minify JS sources, with optional source maps'
+gulp.task('js:compile', function () {
   return gulp.src(config.js.src, { base: paths.themeDir })
   // Concatenate everything within the JavaScript folder.
     // .pipe(gulp.$.naturalSort())
@@ -31,7 +32,8 @@ gulp.task('js:compile', 'Compile & minify JS sources, with optional source maps'
     }));
 });
 
-gulp.task('js:clean', 'Delete compiled JS files', function (done) {
+// 'Delete compiled JS files'
+gulp.task('js:clean', function (done) {
   del([
     config.js.dest + '*.{js,js.map}'
   ]).then(function () {
@@ -39,7 +41,8 @@ gulp.task('js:clean', 'Delete compiled JS files', function (done) {
   });
 });
 
-gulp.task('js:hint', 'Perform JS hint checks on sources', function () {
+// 'Perform JS hint checks on sources'
+gulp.task('js:hint', function () {
   return gulp.src(config.js.hint.src)
     .pipe(gulp.$.jshint())
     .pipe(gulp.$.jshint.reporter(require('jshint-stylish')));
@@ -52,7 +55,8 @@ var jsTasks = ['js:compile'];
 if (config.js.hint.enabled) {
   jsTasks.push('js:hint');
 }
-gulp.task('js', 'Execute all configured JS actions (compile, optional hint & lints based on config)', jsTasks);
+gulp.task('js', gulp.series('js:compile'));
+// js.description = 'Execute all configured JS actions (compile, optional hint & lints based on config)';
 tasks.compile.push('js');
 tasks.clean.push('js:clean');
 tasks.validate.push('js:hint');
@@ -60,7 +64,8 @@ tasks.validate.push('js:hint');
 /*************************************************************
  * Watchers
  ************************************************************/
-gulp.task('js:watch', 'Watch and execute configured JS tasks', function () {
-  gulp.watch(config.js.src, ['js']);
+// 'Watch and execute configured JS tasks'
+gulp.task('js:watch', function () {
+  gulp.watch(config.js.src, gulp.series('js'));
 });
 tasks.watch.push('js:watch');

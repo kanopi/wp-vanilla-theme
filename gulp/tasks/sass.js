@@ -4,20 +4,20 @@
  * Variables
  ************************************************************/
 // Modules
-var del = require('del');
-var sassdoc = require('sassdoc');
+var del           = require('del');
+var sassdoc       = require('sassdoc');
 var normalizeScss = require('node-normalize-scss');
 // Globals
-var gulp = global.gulp;
-var config = global.config;
-
-var tasks = global.tasks;
+var gulp        = global.gulp;
+var config      = global.config;
+var tasks       = global.tasks;
 var browserSync = global.browserSync;
 
 /*************************************************************
  * Operations
  ************************************************************/
-gulp.task('sass:compile', 'Compile Scss to CSS using Libsass with Autoprefixer and SourceMaps', function () {
+// 'Compile Scss to CSS using Libsass with Autoprefixer and SourceMaps'
+gulp.task('sass:compile', function () {
   return gulp.src(config.sass.themeSrc)
     .pipe(gulp.$.sassGlob())
     .pipe(gulp.$.plumber({
@@ -42,7 +42,6 @@ gulp.task('sass:compile', 'Compile Scss to CSS using Libsass with Autoprefixer a
     .pipe(gulp.$.cleanCss())
     .pipe(gulp.$.sourcemaps.write((config.sass.sourceMapEmbed) ? null : './'))
     .pipe(gulp.$.if(config.sass.flattenDestOutput, gulp.$.flatten()))
-    // .pipe(gulp.dest(config.sass.themeDest))
     .pipe(gulp.dest(config.sass.dest))
     .pipe(gulp.$.if(config.sass.sizeReport.enabled,
       gulp.$.sizereport(config.sass.sizeReport.options)
@@ -50,7 +49,8 @@ gulp.task('sass:compile', 'Compile Scss to CSS using Libsass with Autoprefixer a
     .pipe(browserSync.stream({match: '**/*.css'}));
 });
 
-gulp.task('sass:clean', 'Delete compiled CSS files', function (done) {
+// 'Delete compiled CSS files'
+gulp.task('sass:clean', function (done) {
   del([
     config.sass.dest + '*.{css,css.map}'
   ]).then(function () {
@@ -58,7 +58,8 @@ gulp.task('sass:clean', 'Delete compiled CSS files', function (done) {
   });
 });
 
-gulp.task('sass:lint', 'Lint Scss files', function () {
+// 'Lint Scss files'
+gulp.task('sass:lint', function () {
   var src = config.sass.watchSrc;
   if (config.sass.lint.extraSrc) {
     src = src.concat(config.sass.lint.extraSrc);
@@ -70,7 +71,8 @@ gulp.task('sass:lint', 'Lint Scss files', function () {
     .pipe(gulp.$.if(config.sass.lint.failOnError, gulp.$.sassLint.failOnError()));
 });
 
-gulp.task('sass:docs', 'Build CSS docs using SassDoc', function () {
+// 'Build CSS docs using SassDoc'
+gulp.task('sass:docs', function () {
   return gulp.src(config.sass.src)
     .pipe(sassdoc({
       dest: config.sass.docs.dest,
@@ -82,7 +84,8 @@ gulp.task('sass:docs', 'Build CSS docs using SassDoc', function () {
     }));
 });
 
-gulp.task('sass:docs:clean', 'Delete compiled CSS docs', function (done) {
+// 'Delete compiled CSS docs'
+gulp.task('sass:docs:clean', function (done) {
   del([
     config.sass.docs.dest
   ]).then(function () {
@@ -93,16 +96,28 @@ gulp.task('sass:docs:clean', 'Delete compiled CSS docs', function (done) {
 /*************************************************************
  * Builders
  ************************************************************/
-var sassTasks = ['sass:compile'];
-if (config.sass.lint.enabled) {
-  sassTasks.push('sass:lint');
-}
-if (config.sass.docs.enabled) {
-  sassTasks.push('sass:docs');
-  tasks.clean.push('sass:docs:clean');
-}
+// var sassTasks = ['sass:compile'];
+// if (config.sass.lint.enabled) {
+//   sassTasks.push('sass:lint');
+// }
+// if (config.sass.docs.enabled) {
+//   sassTasks.push('sass:docs');
+//   tasks.clean.push('sass:docs:clean');
+// }
 
-gulp.task('sass', 'Execute all configured Sass actions (compile, optional lint/sourcemaps based on config)', sassTasks);
+// 'Execute all configured Sass actions (compile, optional lint/sourcemaps based on config)'
+// gulp.task('sass', sassTasks);
+gulp.task('sass', function () {
+	var sassTasks = ['sass:compile'];
+	if (config.sass.lint.enabled) {
+	  sassTasks.push('sass:lint');
+	}
+	if (config.sass.docs.enabled) {
+	  sassTasks.push('sass:docs');
+	  tasks.clean.push('sass:docs:clean');
+	}
+})
+
 tasks.compile.push('sass');
 tasks.clean.push('sass:clean');
 tasks.validate.push('sass:lint');
@@ -111,6 +126,7 @@ tasks.validate.push('sass:lint');
  * Watchers
  ************************************************************/
 gulp.task('sass:watch', function () {
-  return gulp.watch(config.sass.watchSrc, sassTasks);
+  // return gulp.watch(config.sass.watchSrc, gulp.series('sassTasks'));
+  return gulp.watch(config.sass.watchSrc, gulp.series('sass:compile'));
 });
 tasks.watch.push('sass:watch');
