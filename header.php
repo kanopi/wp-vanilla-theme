@@ -40,7 +40,7 @@
 			$kanopi_description = get_bloginfo( 'description', 'display' );
 			if ( $kanopi_description || is_customize_preview() ) :
 				?>
-				<p class="site-description"><?php echo $kanopi_description; /* WPCS: xss ok. */ ?></p>
+				<p class="site-description"><?php echo wp_kses_post( $kanopi_description ); ?></p>
 			<?php endif; ?>
 		</div><!-- .site-branding -->
 
