@@ -157,3 +157,188 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+
+/**
+ * Custom Event post type.
+ */
+function kanopi_event_post_type() {
+
+	$labels = [
+		'name'                  => _x( 'Events', 'Post Type General Name', 'kanopi' ),
+		'singular_name'         => _x( 'Event', 'Post Type Singular Name', 'kanopi' ),
+		'menu_name'             => __( 'Events', 'kanopi' ),
+		'name_admin_bar'        => __( 'Event', 'kanopi' ),
+		'archives'              => __( 'Event Archives', 'kanopi' ),
+		'attributes'            => __( 'Event Attributes', 'kanopi' ),
+		'parent_item_colon'     => __( 'Parent Event:', 'kanopi' ),
+		'all_items'             => __( 'All Events', 'kanopi' ),
+		'add_new_item'          => __( 'Add New Event', 'kanopi' ),
+		'add_new'               => __( 'Add New', 'kanopi' ),
+		'new_item'              => __( 'New Event', 'kanopi' ),
+		'edit_item'             => __( 'Edit Event', 'kanopi' ),
+		'update_item'           => __( 'Update Event', 'kanopi' ),
+		'view_item'             => __( 'View Event', 'kanopi' ),
+		'view_items'            => __( 'View Events', 'kanopi' ),
+		'search_items'          => __( 'Search Event', 'kanopi' ),
+		'not_found'             => __( 'Not found', 'kanopi' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'kanopi' ),
+		'featured_image'        => __( 'Featured Image', 'kanopi' ),
+		'set_featured_image'    => __( 'Set featured image', 'kanopi' ),
+		'remove_featured_image' => __( 'Remove featured image', 'kanopi' ),
+		'use_featured_image'    => __( 'Use as featured image', 'kanopi' ),
+		'insert_into_item'      => __( 'Insert into item', 'kanopi' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this Event', 'kanopi' ),
+		'items_list'            => __( 'Events list', 'kanopi' ),
+		'items_list_navigation' => __( 'Events list navigation', 'kanopi' ),
+		'filter_items_list'     => __( 'Filter Events list', 'kanopi' ),
+	];
+	$args   = [
+		'label'               => __( 'Event', 'kanopi' ),
+		'description'         => __( 'Custom Events', 'kanopi' ),
+		'labels'              => $labels,
+		'supports'            => [ 'title', 'editor', 'thumbnail' ],
+		'taxonomies'          => [ 'event_type' ],
+		'hierarchical'        => false,
+		'public'              => true,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'menu_position'       => 5,
+		'show_in_admin_bar'   => true,
+		'show_in_nav_menus'   => true,
+		'can_export'          => true,
+		'has_archive'         => true,
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'capability_type'     => 'post',
+	];
+	register_post_type( 'events', $args );
+
+}
+add_action( 'init', 'kanopi_event_post_type', 0 );
+
+/**
+ * Custom Event Type taxonomy
+ */
+function kanopi_event_type_taxonomy() {
+
+	$labels = [
+		'name'                       => _x( 'Event Types', 'Taxonomy General Name', 'kanopi' ),
+		'singular_name'              => _x( 'Event Type', 'Taxonomy Singular Name', 'kanopi' ),
+		'menu_name'                  => __( 'Event Type', 'kanopi' ),
+		'all_items'                  => __( 'All Event Types', 'kanopi' ),
+		'parent_item'                => __( 'Parent Event Type', 'kanopi' ),
+		'parent_item_colon'          => __( 'Parent Event Type:', 'kanopi' ),
+		'new_item_name'              => __( 'New Event Type Name', 'kanopi' ),
+		'add_new_item'               => __( 'Add New Event Type', 'kanopi' ),
+		'edit_item'                  => __( 'Edit Event Type', 'kanopi' ),
+		'update_item'                => __( 'Update Event Type', 'kanopi' ),
+		'view_item'                  => __( 'View Event Type', 'kanopi' ),
+		'separate_items_with_commas' => __( 'Separate event types with commas', 'kanopi' ),
+		'add_or_remove_items'        => __( 'Add or remove event types', 'kanopi' ),
+		'choose_from_most_used'      => __( 'Choose from the most used', 'kanopi' ),
+		'popular_items'              => __( 'Popular Event Typess', 'kanopi' ),
+		'search_items'               => __( 'Search Event Types', 'kanopi' ),
+		'not_found'                  => __( 'Not Found', 'kanopi' ),
+		'no_terms'                   => __( 'No event types', 'kanopi' ),
+		'items_list'                 => __( 'Event Types list', 'kanopi' ),
+		'items_list_navigation'      => __( 'Event Types list navigation', 'kanopi' ),
+	];
+	$args   = [
+		'labels'            => $labels,
+		'hierarchical'      => true,
+		'public'            => true,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'show_in_nav_menus' => true,
+		'show_tagcloud'     => true,
+	];
+	register_taxonomy( 'event_type', [ 'events' ], $args );
+
+}
+add_action( 'init', 'kanopi_event_type_taxonomy', 0 );
+
+if ( function_exists( 'kanopi_acf_add_local_field_group' ) ) :
+
+	/**
+	 * ACF Event Meta Field Group
+	 *
+	 * @var array the ACF field group array.
+	 */
+	kanopi_acf_add_local_field_group([
+		'key'                   => 'group_5f45969fa2aff',
+		'title'                 => 'Event Meta',
+		'fields'                => [
+			[
+				'key'               => 'field_5f45993d5b664',
+				'label'             => 'Subtitle',
+				'name'              => 'subtitle',
+				'type'              => 'text',
+				'instructions'      => '',
+				'required'          => 0,
+				'conditional_logic' => 0,
+				'wrapper'           => array(
+					'width' => '',
+					'class' => '',
+					'id'    => '',
+				),
+				'default_value'     => '',
+				'placeholder'       => '',
+				'prepend'           => '',
+				'append'            => '',
+				'maxlength'         => '',
+			],
+			[
+				'key'               => 'field_5f45994d5b665',
+				'label'             => 'Start Date',
+				'name'              => 'start_date',
+				'type'              => 'date_time_picker',
+				'instructions'      => '',
+				'required'          => 0,
+				'conditional_logic' => 0,
+				'wrapper'           => [
+					'width' => '50',
+					'class' => '',
+					'id'    => '',
+				],
+				'display_format'    => 'd/m/Y g:i a',
+				'return_format'     => 'd/m/Y g:i a',
+				'first_day'         => 1,
+			],
+			[
+				'key'               => 'field_5f45997e5b666',
+				'label'             => 'End Date',
+				'name'              => 'end_date',
+				'type'              => 'date_time_picker',
+				'instructions'      => '',
+				'required'          => 0,
+				'conditional_logic' => 0,
+				'wrapper'           => [
+					'width' => '50',
+					'class' => '',
+					'id'    => '',
+				],
+				'display_format'    => 'd/m/Y g:i a',
+				'return_format'     => 'd/m/Y g:i a',
+				'first_day'         => 1,
+			],
+		],
+		'location'              => [
+			[
+				[
+					'param'    => 'post_type',
+					'operator' => '==',
+					'value'    => 'events',
+				],
+			],
+		],
+		'menu_order'            => 0,
+		'position'              => 'acf_after_title',
+		'style'                 => 'default',
+		'label_placement'       => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen'        => '',
+		'active'                => true,
+		'description'           => '',
+	]);
+endif;
