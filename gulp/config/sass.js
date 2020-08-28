@@ -8,7 +8,8 @@ var paths = global.paths;
 global.config.sass = {
   enabled: true,
   src: ([
-    // paths.themeDir + '/components/css/**/*.scss'
+		// paths.themeDir + '/components/css/**/*.scss'
+		paths.themeDir + '/sass/**/*.scss'
   ]),
   themeSrc: ([
     paths.themeDir + '/sass/**/*.scss'
@@ -40,7 +41,7 @@ global.config.sass = {
     // paths.themeDir + '/node_modules/motion-ui/src'
   ]),
   docs: {
-    enabled: true,
+    enabled: false,
     dest: paths.themeDir + '/sassdoc',
     verbose: false,
     sort: [

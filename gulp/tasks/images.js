@@ -15,9 +15,9 @@ var browserSync = global.browserSync;
 /*************************************************************
  * Operations
  ************************************************************/
-gulp.task('images', 'Attempt to run compression on image assets', function () {
+const images = function (done) {
   console.log(config.images.src);
-  return gulp.src(config.images.src)
+  gulp.src(config.images.src)
     .pipe(gulp.$.plumber({
       errorHandler: gulp.$.notify.onError('Error: <%= error.message %>')
     }))
@@ -33,8 +33,12 @@ gulp.task('images', 'Attempt to run compression on image assets', function () {
         .pipe(gulp.$.if(config.images.sizeReport.enabled,
           gulp.$.sizereport(config.images.sizeReport.options)
         ))
-    );
-});
+		);
+	done();
+};
+images.displayName = 'images';
+images.description = 'Attempt to run compression on image assets';
+gulp.task(images);
 
 /*************************************************************
  * Builders
