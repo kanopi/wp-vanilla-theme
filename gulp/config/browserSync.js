@@ -4,7 +4,7 @@
  * Variables
  ************************************************************/
 // Local
-var localUrl = 'kanopi-2019.docksal'; // EG 'localhost', 'mysite.dev', leave blank for
+var localUrl = 'kanopi.docksal'; // EG 'localhost', 'mysite.dev', leave blank for
 // Globals
 var paths = global.paths;
 

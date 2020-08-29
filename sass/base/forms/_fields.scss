@@ -1,26 +1,28 @@
-input[type="text"],
-input[type="email"],
-input[type="url"],
-input[type="password"],
-input[type="search"],
-input[type="number"],
-input[type="tel"],
-input[type="range"],
-input[type="date"],
-input[type="month"],
-input[type="week"],
-input[type="time"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="color"],
-textarea {
-	color: $color__text-input;
-	border: 1px solid $color__border-input;
-	border-radius: 3px;
-	padding: 3px;
+input {
 
-	&:focus {
-		color: $color__text-input-focus;
+	&[type='text'],
+	&[type='email'],
+	&[type='url'],
+	&[type='password'],
+	&[type='search'],
+	&[type='number'],
+	&[type='tel'],
+	&[type='range'],
+	&[type='date'],
+	&[type='month'],
+	&[type='week'],
+	&[type='time'],
+	&[type='datetime'],
+	&[type='datetime-local'],
+	&[type='color'] {
+		padding: 3px;
+		border: 1px solid $color__border-input;
+		border-radius: 3px;
+		color: $color__text-input;
+
+		&:focus {
+			color: $color__text-input-focus;
+		}
 	}
 }
 
@@ -30,4 +32,12 @@ select {
 
 textarea {
 	width: 100%;
+	padding: 3px;
+	border: 1px solid $color__border-input;
+	border-radius: 3px;
+	color: $color__text-input;
+
+	&:focus {
+		color: $color__text-input-focus;
+	}
 }
