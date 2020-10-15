@@ -258,14 +258,17 @@ function kanopi_event_type_taxonomy() {
 }
 add_action( 'init', 'kanopi_event_type_taxonomy', 0 );
 
-if ( function_exists( 'kanopi_acf_add_local_field_group' ) ) :
+/**
+ * Load the events ACF field group.
+ */
+function kanopi_acf_add_local_field_group() {
 
 	/**
 	 * ACF Event Meta Field Group
 	 *
 	 * @var array the ACF field group array.
 	 */
-	kanopi_acf_add_local_field_group([
+	acf_add_local_field_group([
 		'key'                   => 'group_5f45969fa2aff',
 		'title'                 => 'Event Meta',
 		'fields'                => [
@@ -341,4 +344,6 @@ if ( function_exists( 'kanopi_acf_add_local_field_group' ) ) :
 		'active'                => true,
 		'description'           => '',
 	]);
-endif;
+}
+
+add_action( 'acf/init', 'kanopi_acf_add_local_field_group' );
