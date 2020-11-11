@@ -7,8 +7,11 @@
 	margin: 0 0 1.5em;
 }
 
-.updated:not(.published) {
-	display: none;
+.updated {
+
+	&:not(.published) {
+		display: none;
+	}
 }
 
 .page-content,
@@ -18,6 +21,6 @@
 }
 
 .page-links {
-	clear: both;
 	margin: 0 0 1.5em;
+	clear: both;
 }

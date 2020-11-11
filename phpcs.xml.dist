@@ -14,7 +14,13 @@
     <exclude-pattern>/web/wp-content/themes/wp-vanilla-theme/gulp/*</exclude-pattern>
     <exclude-pattern>/web/wp-content/themes/wp-vanilla-theme/libraries/*</exclude-pattern>
     <exclude-pattern>/web/wp-content/themes/wp-vanilla-theme/node_modules/*</exclude-pattern>
-    <exclude-pattern>/web/wp-content/themes/wp-vanilla-theme/sassdoc/*</exclude-pattern>
+    <exclude-pattern>/web/wp-content/custom/themes/wp-vanilla-theme/sassdoc/*</exclude-pattern>
+	<exclude-pattern>/web/wp-content/custom/themes/wp-vanilla-theme/dist/*</exclude-pattern>
+    <exclude-pattern>/web/wp-content/custom/themes/wp-vanilla-theme/fonts/*</exclude-pattern>
+    <exclude-pattern>/web/wp-content/custom/themes/wp-vanilla-theme/gulp/*</exclude-pattern>
+    <exclude-pattern>/web/wp-content/custom/themes/wp-vanilla-theme/libraries/*</exclude-pattern>
+    <exclude-pattern>/web/wp-content/custom/themes/wp-vanilla-theme/node_modules/*</exclude-pattern>
+    <exclude-pattern>/web/wp-content/custom/themes/wp-vanilla-theme/sassdoc/*</exclude-pattern>
 
 	<!-- Exclude the Composer Vendor directory. -->
 	<exclude-pattern>/vendor/*</exclude-pattern>
