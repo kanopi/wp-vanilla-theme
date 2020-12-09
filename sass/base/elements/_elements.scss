@@ -2,28 +2,30 @@ html {
 	box-sizing: border-box;
 }
 
-*,
-*:before,
-*:after { /* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
-	box-sizing: inherit;
+* { // Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+
+	&::before,
+	&::after {
+		box-sizing: inherit;
+	}
 }
 
 body {
-	background: $color__background-body; /* Fallback for when there is no custom background color defined. */
+	background: $color__background-body; // Fallback for when there is no custom background color defined.
 }
 
 hr {
-	background-color: $color__background-hr;
-	border: 0;
 	height: 1px;
 	margin-bottom: 1.5em;
+	border: 0;
+	background-color: $color__background-hr;
 }
 
 img {
-	height: auto; /* Make sure images are scaled correctly. */
-	max-width: 100%; /* Adhere to container width. */
+	max-width: 100%; // Adhere to container width.
+	height: auto; // Make sure images are scaled correctly.
 }
 
 figure {
-	margin: 1em 0; /* Extra wide images within figure tags don't overflow the content area. */
+	margin: 1em 0; // Extra wide images within figure tags don't overflow the content area.
 }

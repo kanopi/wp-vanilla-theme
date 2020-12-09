@@ -1,47 +1,109 @@
-[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)
-
-_s
+Kanopi Starter Theme
 ===
 
-Hi. I'm a starter theme called `_s`, or `underscores`, if you like. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
+Based on `_s` or `_`underscores`.
 
-My ultra-minimal CSS might make me look like theme tartare but that means less stuff to get in your way when you're designing your awesome theme. Here are some of the other more interesting things you'll find here:
+This starter theme has been modified to use sassified, uses to use NPM and Gulp.
 
-* A just right amount of lean, well-commented, modern, HTML5 templates.
-* A helpful 404 template.
-* A custom header implementation in `inc/custom-header.php` just add the code snippet found in the comments of `inc/custom-header.php` to your `header.php` template.
-* Custom template tags in `inc/template-tags.php` that keep your templates clean and neat and prevent code duplication.
-* Some small tweaks in `inc/template-functions.php` that can improve your theming experience.
-* A script at `js/navigation.js` that makes your menu a toggled dropdown on small screens (like your phone), ready for CSS artistry. It's enqueued in `functions.php`.
-* 2 sample CSS layouts in `layouts/` for a sidebar on either side of your content.
-Note: `.no-sidebar` styles are not automatically loaded.
-* Smartly organized starter CSS in `style.css` that will help you to quickly get your design off the ground.
-* Full support for `WooCommerce plugin` integration with hooks in `inc/woocommerce.php`, styling override woocommerce.css with product gallery features (zoom, swipe, lightbox) enabled.
-* Licensed under GPLv2 or later. :) Use it to make something cool.
+Requires:
+* Node v10.12.0
+* Gulp 3
+
+Notes:
+* NPM does not install the gulp-cli. This theme assumes the package is installed globally.
+* package.json and package-lock.json were built within a docksal docker container.
+* NPM packages are out of date. These are being updated in the move to Gulp 4.
+
+To use browser sync besure to update the localUrl found here `gulp/config/browserSync.js`.
 
 Getting Started
 ---------------
 
 If you want to keep it simple, head over to https://underscores.me and generate your `_s` based theme from there. You just input the name of the theme you want to create, click the "Generate" button, and you get your ready-to-awesomize starter theme.
 
-If you want to set things up manually, download `_s` from GitHub. The first thing you want to do is copy the `_s` directory and change the name to something else (like, say, `megatherium-is-awesome`), and then you'll need to do a five-step find and replace on the name in all the templates.
+When renaming the theme, rename the direcotry and search/replace the following.
 
 1. Search for `'_s'` (inside single quotations) to capture the text domain.
 2. Search for `_s_` to capture all the function names.
 3. Search for `Text Domain: _s` in `style.css`.
-4. Search for <code>&nbsp;_s</code> (with a space before it) to capture DocBlocks.
+4. Search for `<code>&nbsp;_s</code>` (with a space before it) to capture DocBlocks.
 5. Search for `_s-` to capture prefixed handles.
+6. Search for kanopi.
+7. Search for Kanopi.
 
-OR
+NPM and Gulp
+------------
 
-1. Search for: `'_s'` and replace with: `'megatherium-is-awesome'`.
-2. Search for: `_s_` and replace with: `megatherium_is_awesome_`.
-3. Search for: `Text Domain: _s` and replace with: `Text Domain: megatherium-is-awesome` in `style.css`.
-4. Search for: <code>&nbsp;_s</code> and replace with: <code>&nbsp;Megatherium_is_Awesome</code>.
-5. Search for: `_s-` and replace with: `megatherium-is-awesome-`.
+The site should Glob your JS and and SCSS together.
+Right now, if you add a new SCSS partial or an new JS file you may need to stop and restart Gulp, use `gulp build`, or the NVM script. We are in the process of resolving this.
 
-Then, update the stylesheet header in `style.css`, the links in `footer.php` with your own information and rename `_s.pot` from `languages` folder to use the theme's slug. Next, update or delete this readme.
+1. Run `npm install`.
+1. Run `npm run watch` to watch for changes. Alternatively run `gulp watch`.
+1. Run `npm run serve` to launch browserSync. Alternatively run `gulp serve`.
+1. Run `npm run build` to clean and compile for PROD. Alternatively run `gulp build`.
 
-Now you're ready to go! The next step is easy to say, but harder to do: make an awesome WordPress theme. :)
+Check our the gulp directory or the `package.json` file for more task to run.
 
 Good luck!
+
+
+About Using the Theme
+------------
+
+#### Breakpoints
+
+File: `sass/utilities/variables/_breakpoints.scss`
+
+Breakpoints are managed with an array of bears, because who doesn't love bears. If you need additional breakpoints, you can add them here with a custom name. Breakpoints should be applied to the selector they are controlling, rather than applying several different selectors to a breakpoint. Example:
+
+		div {
+			display: none;
+
+			@include breakpoint(bear(mama)) {
+				display: block;
+			}
+
+			a {
+				width: 100%;
+
+				@include breakpoint(bear(mama)) {
+					width: 50%;
+				}
+
+			}
+		}
+
+Breakpoints by default are "minimum width", meaning you should be building mobile first whenever possible. 
+
+
+#### Interpolation
+
+You can interpolate items for better responsive control over things like padding and font sizes. 
+
+In the following example, we can have the font-size at 30px on `bear(teen)` and lower, with `bear(grandpa)` and higher using 60px. In between, the font size will gradually increase and decrease with a percentage value.
+
+		div {
+			@include interpolate(font-size, bear(teen), bear(grandpa), 30px, 60px);
+		}
+
+
+In the following example, we can apply interpolate-many to multiple items to use the same values. In this case, the left and right padding would 10px on `bear(papa)` and gradually increase up to 50px at `bear(mama)`.
+
+		div {
+			@include interpolate-many(bear(papa), bear(mama), 10px, 50px, padding-right, padding-left);
+		}
+
+#### Color Presets
+
+File: `sass/utilities/variables/_colors.scss`
+
+You can add as many color presets as your theme needs, and even create new palettes.
+Use: `color: color-preset(black);` 
+
+#### Sass Lint, PHPCS, & Beautification
+
+You can set your IDE up to read the `.sass-lint.yml` file and alert you to errors against the theme standards. A beautifier can also be a helpful tool to keep your sass looking clean.
+
+This theme follows WordPress Core for PHP standards. The included `phpcs.xml.dist` file can be used with your IDE to do automatic code sniffing and beautificaiton.
+
+Kanopi expects their developers to imploy these standards. If you are a contractor and do not have your IDE configured to accommodate, please let your tech lead know.

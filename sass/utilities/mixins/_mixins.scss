@@ -1,31 +1,31 @@
 // Rem output with px fallback
-@mixin font-size($sizeValue: 1) {
-	font-size: ($sizeValue * 16) * 1px;
-	font-size: $sizeValue * 1rem;
+@mixin font-size($size__value: 1) {
+	font-size: ($size__value * 16) * 1px;
+	font-size: $size__value * 1rem; // sass-lint:disable-line no-duplicate-properties
 }
 
 // Center block
 @mixin center-block {
 	display: block;
-	margin-left: auto;
 	margin-right: auto;
+	margin-left: auto;
 }
 
 // Clearfix
-@mixin clearfix() {
-	content: '';
+@mixin clearfix {
 	display: table;
+	content: '';
 	table-layout: fixed;
 }
 
 // Clear after (not all clearfix need this also)
-@mixin clearfix-after() {
+@mixin clearfix-after {
 	clear: both;
 }
 
 // Column width with margin
-@mixin column-width($numberColumns: 3) {
-	width: map-get($columns, $numberColumns) - (($columns__margin * ($numberColumns - 1)) / $numberColumns);
+@mixin column-width($number__columns: 3) {
+	width: map-get($columns, $number__columns) - (($columns__margin * ($number__columns - 1)) / $number__columns);
 }
 
 /// ie11
