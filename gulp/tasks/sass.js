@@ -10,15 +10,14 @@ var normalizeScss = require('node-normalize-scss');
 // Globals
 var gulp = global.gulp;
 var config = global.config;
-
 var tasks = global.tasks;
 var browserSync = global.browserSync;
 
 /*************************************************************
  * Operations
  ************************************************************/
-gulp.task('sass:compile', 'Compile Scss to CSS using Libsass with Autoprefixer and SourceMaps', function () {
-  return gulp.src(config.sass.themeSrc)
+const sass_compile = function (done) {
+  gulp.src(config.sass.themeSrc)
     .pipe(gulp.$.sassGlob())
     .pipe(gulp.$.plumber({
       errorHandler: function (error) {
@@ -47,31 +46,42 @@ gulp.task('sass:compile', 'Compile Scss to CSS using Libsass with Autoprefixer a
     .pipe(gulp.$.if(config.sass.sizeReport.enabled,
       gulp.$.sizereport(config.sass.sizeReport.options)
     ))
-    .pipe(browserSync.stream({match: '**/*.css'}));
-});
+		.pipe(browserSync.stream({match: '**/*.css'}));
+	done();
+}
+sass_compile.displayName = 'sass:compile';
+sass_compile.description = 'Compile Scss to CSS using Libsass with Autoprefixer and SourceMaps';
+gulp.task(sass_compile);
 
-gulp.task('sass:clean', 'Delete compiled CSS files', function (done) {
+const sass_clean = function (done) {
   del([
     config.sass.dest + '*.{css,css.map}'
   ]).then(function () {
     done();
   });
-});
+}
+sass_clean.displayName = 'sass:clean';
+sass_clean.description = 'Delete compiled CSS files';
+gulp.task(sass_clean);
 
-gulp.task('sass:lint', 'Lint Scss files', function () {
+const sass_lint = function (done) {
   var src = config.sass.watchSrc;
   if (config.sass.lint.extraSrc) {
     src = src.concat(config.sass.lint.extraSrc);
   }
-  return gulp.src(src)
+  gulp.src(src)
     .pipe(gulp.$.cached('validate:css'))
     .pipe(gulp.$.sassLint())
     .pipe(gulp.$.sassLint.format())
-    .pipe(gulp.$.if(config.sass.lint.failOnError, gulp.$.sassLint.failOnError()));
-});
+		.pipe(gulp.$.if(config.sass.lint.failOnError, gulp.$.sassLint.failOnError()));
+	done();
+}
+sass_lint.displayName = 'sass:lint';
+sass_lint.description = 'Lint Scss files';
+gulp.task(sass_lint);
 
-gulp.task('sass:docs', 'Build CSS docs using SassDoc', function () {
-  return gulp.src(config.sass.src)
+const sass_docs = function (done) {
+  gulp.src(config.sass.src)
     .pipe(sassdoc({
       dest: config.sass.docs.dest,
       verbose: config.sass.docs.verbose,
@@ -79,16 +89,23 @@ gulp.task('sass:docs', 'Build CSS docs using SassDoc', function () {
       exclude: config.sass.docs.exclude,
       theme: config.sass.docs.theme,
       sort: config.sass.docs.sort
-    }));
-});
+		}));
+	done();
+};
+sass_docs.displayName = 'sass:docs';
+sass_docs.description = 'Build CSS docs using SassDoc';
+gulp.task(sass_docs);
 
-gulp.task('sass:docs:clean', 'Delete compiled CSS docs', function (done) {
+const sass_docs_clean = function (done) {
   del([
     config.sass.docs.dest
   ]).then(function () {
     done();
   });
-});
+}
+sass_docs_clean.displayName = 'sass:docs:clean';
+sass_docs_clean.description = 'Delete compiled CSS docs';
+gulp.task(sass_docs_clean);
 
 /*************************************************************
  * Builders
@@ -102,7 +119,11 @@ if (config.sass.docs.enabled) {
   tasks.clean.push('sass:docs:clean');
 }
 
-gulp.task('sass', 'Execute all configured Sass actions (compile, optional lint/sourcemaps based on config)', sassTasks);
+const sass_run = gulp.series(sassTasks);
+sass_run.displayName = 'sass';
+sass_run.description = 'Execute all configured Sass actions (compile, optional lint/sourcemaps based on config)';
+gulp.task(sass_run);
+
 tasks.compile.push('sass');
 tasks.clean.push('sass:clean');
 tasks.validate.push('sass:lint');
@@ -110,7 +131,12 @@ tasks.validate.push('sass:lint');
 /*************************************************************
  * Watchers
  ************************************************************/
-gulp.task('sass:watch', function () {
-  return gulp.watch(config.sass.watchSrc, sassTasks);
-});
+const sass_watch = function () {
+  var options = {interval: 800, usePolling: true};
+  gulp.watch(config.sass.src, options, gulp.series(['sass']));
+};
+sass_watch.displayName = 'sass:watch';
+sass_watch.description = 'Watch and execute configured SASS tasks';
+gulp.task(sass_watch);
+
 tasks.watch.push('sass:watch');

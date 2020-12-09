@@ -7,16 +7,12 @@
 var paths = global.paths;
 global.config.sass = {
   enabled: true,
-  src: ([
-    // paths.themeDir + '/components/css/**/*.scss'
-  ]),
+  src: paths.sass,
   themeSrc: ([
-    paths.themeDir + '/sass/**/*.scss'
+    paths.themeDir + 'sass/**/*.scss'
   ]),
-  watchSrc: ([
-    paths.themeDir + '/sass/**/*.scss'
-  ]),
-  dest: paths.themeDir + '/dist/css',
+  watchSrc: paths.themeDir + 'sass/**/*.scss',
+  dest: paths.themeDir + 'dist/css',
   flattenDestOutput: false,
   lint: {
     enabled: true,
@@ -40,7 +36,7 @@ global.config.sass = {
     // paths.themeDir + '/node_modules/motion-ui/src'
   ]),
   docs: {
-    enabled: true,
+    enabled: false,
     dest: paths.themeDir + '/sassdoc',
     verbose: false,
     sort: [

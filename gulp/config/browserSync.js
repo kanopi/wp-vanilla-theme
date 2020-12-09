@@ -4,7 +4,7 @@
  * Variables
  ************************************************************/
 // Local
-var localUrl = 'kanopi.docksal'; // EG 'localhost', 'mysite.dev', leave blank for
+var localUrl = process.env.VIRTUAL_HOST; // EG 'localhost', 'mysite.dev', leave blank for
 // Globals
 var paths = global.paths;
 
