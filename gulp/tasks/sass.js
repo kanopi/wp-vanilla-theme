@@ -10,7 +10,6 @@ var normalizeScss = require('node-normalize-scss');
 // Globals
 var gulp = global.gulp;
 var config = global.config;
-
 var tasks = global.tasks;
 var browserSync = global.browserSync;
 
@@ -132,8 +131,12 @@ tasks.validate.push('sass:lint');
 /*************************************************************
  * Watchers
  ************************************************************/
-gulp.task('sass:watch', function () {
-	var options = {interval: 1000, usePolling: true};
-  gulp.watch(config.sass.watchSrc, options, gulp.series(sassTasks));
-});
+const sass_watch = function () {
+  var options = {interval: 800, usePolling: true};
+  gulp.watch(config.sass.src, options, gulp.series(['sass']));
+};
+sass_watch.displayName = 'sass:watch';
+sass_watch.description = 'Watch and execute configured SASS tasks';
+gulp.task(sass_watch);
+
 tasks.watch.push('sass:watch');

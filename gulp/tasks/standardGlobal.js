@@ -26,7 +26,7 @@ validate_run.displayName = 'validate';
 validate_run.description = 'Runs all validation tasks, no exceptions';
 gulp.task(validate_run);
 
-const watch_run = gulp.series(tasks.watch);
+const watch_run = gulp.parallel(tasks.watch);
 watch_run.displayName = 'watch';
 watch_run.description = 'Runs default watches across the board';
 gulp.task(watch_run);
