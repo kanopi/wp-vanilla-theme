@@ -5,6 +5,7 @@
  ************************************************************/
 // Modules
 var del = require('del');
+var uglify = require('gulp-uglify');
 // Globals
 var gulp = global.gulp;
 var config = global.config;
@@ -21,6 +22,7 @@ const js_compile = function (done) {
     // .pipe(gulp.$.naturalSort())
     .pipe(gulp.$.sourcemaps.init())
     .pipe(gulp.$.concat('scripts.js'))
+    .pipe(uglify())
     .pipe(gulp.$.sourcemaps.write((config.js.sourceMapEmbed) ? null : './', {
       addComment: false,
     }))
