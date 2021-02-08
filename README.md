@@ -6,8 +6,8 @@ Based on `_s` or `_`underscores`.
 This starter theme has been modified to use sassified, uses to use NPM and Gulp.
 
 Requires:
-* Node v10.12.0
-* Gulp 3
+* Node 10+
+* Gulp 4
 
 Notes:
 * NPM does not install the gulp-cli. This theme assumes the package is installed globally.

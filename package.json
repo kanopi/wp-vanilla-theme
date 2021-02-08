@@ -22,6 +22,8 @@
     "svg4everybody": "^2.1.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
     "breakpoint-sass": "^2.7.1",
     "browser-sync": "^2.26.12",
     "compass-mixins": "^0.12.10",
@@ -29,6 +31,7 @@
     "glob": "^7.1.4",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^5.0.0",
+    "gulp-babel": "^8.0.0",
     "gulp-cached": "^1.1.1",
     "gulp-clean-css": "^3.9.3",
     "gulp-concat": "^2.6.1",
