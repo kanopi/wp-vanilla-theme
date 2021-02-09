@@ -9,7 +9,7 @@ global.config.sass = {
   enabled: true,
   src: paths.sass,
   themeSrc: ([
-    paths.themeDir + 'sass/**/*.scss'
+    paths.themeDir + 'sass/style.scss'
   ]),
   watchSrc: paths.themeDir + 'sass/**/*.scss',
   dest: paths.themeDir + 'dist/css',
