@@ -6,13 +6,12 @@ Based on `_s` or `_`underscores`.
 This starter theme has been modified to use sassified, uses to use NPM and Gulp.
 
 Requires:
-* Node v10.12.0
-* Gulp 3
+* Node >10.   Version 14 works nice and is recent
+* Gulp 4
 
 Notes:
-* NPM does not install the gulp-cli. This theme assumes the package is installed globally.
+* NPM does not install the gulp-cli. This theme assumes the package is installed globally. Docksal installations will need to add `gulp-cli` so it can be run withing the container.
 * package.json and package-lock.json were built within a docksal docker container.
-* NPM packages are out of date. These are being updated in the move to Gulp 4.
 
 To use browser sync besure to update the localUrl found here `gulp/config/browserSync.js`.
 
