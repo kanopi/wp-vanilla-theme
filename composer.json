@@ -1,12 +1,20 @@
 {
-    "name": "kanopi/wp-vanilla",
-    "description": "A WordPress starter theme for Kanopi Studios.",
-    "type": "wordpress-theme-custom",
-    "license": "GPL-2.0+",
-    "authors": [
-        {
-            "name": "Kanopi Studios",
-            "homepage": "https://kanopi.com/"
-        }
-    ]
+  "name": "kanopi/wp-vanilla",
+  "type": "wordpress-theme-custom",
+  "minimum-stability": "dev",
+  "description": "A WordPress starter theme for Kanopi Studios.",
+  "keywords": ["WordPress"],
+  "homepage": "https://github.com/kanopi/wp-vanilla-theme",
+  "support": {
+    "issues": "https://github.com/kanopi/wp-vanilla-theme/issues",
+    "source": "https://github.com/kanopi/wp-vanilla-theme"
+  },
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Kanopi Studios",
+      "homepage": "https://kanopi.com/"
+    }
+  ],
+  "require": { }
 }
