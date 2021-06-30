@@ -6,3 +6,24 @@ h5,
 h6 {
 	clear: both;
 }
+
+
+h1,
+.h1--mimic {
+	@include interpolate(font-size, bear(papa), bear(grandma), 36px, 40px);
+}
+
+h2,
+.h2--mimic {
+	@include interpolate(font-size, bear(papa), bear(grandma), 28px, 36px);
+}
+
+h3,
+.h3--mimic {
+	@include interpolate(font-size, bear(papa), bear(grandma), 22px, 28px);
+}
+
+
+.overline {
+	font-size: rem-calc(16);
+}

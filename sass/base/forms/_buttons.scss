@@ -2,6 +2,7 @@ button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
+	@include transition;
 	@include font-size(.75);
 	padding: .6em 1em .4em;
 	border: 1px solid $color__border-button;
@@ -18,4 +19,25 @@ button,
 	&:focus {
 		border-color: $color__border-button-focus;
 	}
+}
+
+
+
+.btn {
+	@include transition;
+	position: relative;
+	padding: rem-calc(13);
+	border-radius: 0;
+	border: 1px solid color-preset(black);
+	background-color: color-preset(white);
+	color: color-preset(black);
+	font-size: rem-calc(16);
+	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		background-color: color-preset(black);
+		color: color-preset(white);
+	}
+
 }

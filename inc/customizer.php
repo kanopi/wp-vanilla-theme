@@ -25,6 +25,38 @@ function kanopi_customize_register( $wp_customize ) {
 			'render_callback' => 'kanopi_customize_partial_blogdescription',
 		) );
 	}
+
+	// Footer Section.
+	$wp_customize->add_section(
+		'footer_info',
+		[
+			'title'    => 'Footer',
+			'priority' => 21,
+		]
+	);
+
+	$wp_customize->add_setting(
+		'copyright',
+		[
+			'default'           => '',
+			'type'              => 'option',
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'wp_filter_nohtml_kses',
+		]
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'copyright',
+			[
+				'label'    => __( 'Copyright Company', 'kanopi' ),
+				'section'  => 'footer_info',
+				'settings' => 'copyright',
+				'type'     => 'text',
+			]
+		)
+	);
 }
 add_action( 'customize_register', 'kanopi_customize_register' );
 

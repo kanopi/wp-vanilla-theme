@@ -6,15 +6,6 @@
     "url": "https://github.com/kanopi/wp-vanilla-theme"
   },
   "private": true,
-  "scripts": {
-    "gulp": "gulp",
-    "gulp-watch": "gulp watch",
-    "compile": "gulp compile",
-    "clean": "gulp clean",
-    "validate": "gulp validate",
-    "watch": "gulp watch",
-    "build": "gulp build"
-  },
   "dependencies": {
     "lodash": "^4.17.20",
     "moment": "^2.24.0",
@@ -73,7 +64,7 @@
     "sassdoc": "^2.7.3",
     "sync-exec": "^0.6.2",
     "webpagetest": "^0.4.0"
-  }
+  },
   "engines": {
     "node": ">=10 <16"
   }

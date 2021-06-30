@@ -1,0 +1,24 @@
+.site {
+	position: relative;
+	overflow: hidden;
+}
+
+.site-content {
+	@include interpolate-many(bear(teen), bear(grandpa), 20px, 42px, padding-left, padding-right);
+	width: 100%;
+	max-width: $width-container;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.content-area {
+	overflow: visible;
+}
+
+.container {
+	@include interpolate-many(bear(teen), bear(grandpa), 20px, 42px, padding-left, padding-right);
+	width: 100%;
+	max-width: $width-container;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
