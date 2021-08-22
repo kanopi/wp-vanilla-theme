@@ -21,25 +21,10 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */
 
 // TABLE OF CONTENTS:
-// # External Libraries
-// # Utilities
-// # External Libraries that require our variables
 // # Normalize
 // # Base
 // # Components
-// # Print
-// External Libraries
-@import '../node_modules/breakpoint-sass/stylesheets/breakpoint';
-@import '../node_modules/sass-toolkit/stylesheets/toolkit';
-// Utilities
-@import 'utilities/functions/**/*';
-@import 'utilities/variables/**/*';
-@import 'utilities/mixins/**/*';
-// Normalize
+
 @import 'normalize';
-// Base
-@import 'base/**/*';
-// Components
-@import 'components/**/*';
-// Print Styles.
-@import 'print/**/*';
+@import 'base';
+@import 'components';
