@@ -9,42 +9,41 @@ const FileRules = require('./rules/file');
 const ScssLoaders = require('./loaders/scss');
 const TypescriptRules = require('./rules/typescript');
 
-const { devServer, distribution, scssIncludes } = require('./package');
+const basePackConfig = require('./kanopi.pack');
+let kanopiPackConfig = {
+  ...basePackConfig,
+  sourceMaps: true
+};
 
 module.exports = merge.smart(
-  common,
+  common(kanopiPackConfig),
   {
     output: {
-      publicPath: devServer.host
+      publicPath: kanopiPackConfig.devServer.host
     },
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
-      allowedHosts: [
-        '.localhost',
-        'localhost',
-        '.docksal',
-        '127.0.0.1'
-      ],
-      contentBase: distribution,
+      allowedHosts: kanopiPackConfig.devServer.allowedHosts,
+      contentBase: kanopiPackConfig.paths.distribution,
       headers: {
         'Access-Control-Allow-Origin': '*'
       },
       hotOnly: true,
       historyApiFallback: true,
       inline: true,
-      port: devServer.port,
-      publicPath: devServer.host,
+      port: kanopiPackConfig.devServer.port,
+      publicPath: kanopiPackConfig.devServer.host,
     },
     module: {
       rules: [
         ...FileRules(),
-        ...TypescriptRules(),
+        ...TypescriptRules(kanopiPackConfig),
         {
           test: /\.(scss|sass)$/,
           use: [
             'style-loader',
-            ...ScssLoaders(scssIncludes, `$asset_root: '${devServer.host}/';`, true)
+            ...ScssLoaders(kanopiPackConfig,`$asset_root: '${kanopiPackConfig.devServer.host}';`)
           ]
         }
       ]

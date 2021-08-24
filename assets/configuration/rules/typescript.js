@@ -1,12 +1,18 @@
 const BabelLoader = require('../loaders/babel');
 const JavascriptRules = require('./javascript');
 
-module.exports = (use_source_maps, auto_typescript_file_patterns) => {
-    let has_source_maps = use_source_maps ?? false;
-    let auto_typescript_patterns = Array.isArray(auto_typescript_file_patterns)
-        ? auto_typescript_file_patterns : [];
+module.exports = (kanopiPackConfig) => {
+    let has_source_maps = kanopiPackConfig?.sourceMaps ?? false;
+    let auto_typescript_patterns = kanopiPackConfig?.scripts?.additionalTypescriptFileTypes ?? [];
+    let use_auto_typescript_patterns = Array.isArray(auto_typescript_patterns) && 0 < auto_typescript_patterns.length;
+    let typescriptOptions = {
+        transpileOnly: true
+    };
 
-    auto_typescript_patterns.concat([/\.vue$/]);
+    if (use_auto_typescript_patterns) {
+        typescriptOptions['appendTsSuffixTo'] = auto_typescript_patterns
+    }
+
 
     return JavascriptRules(has_source_maps).concat([
         {
@@ -16,10 +22,7 @@ module.exports = (use_source_maps, auto_typescript_file_patterns) => {
                 .concat([
                     {
                         loader: 'ts-loader',
-                        options: {
-                            appendTsSuffixTo: auto_typescript_patterns,
-                            transpileOnly: true
-                        }
+                        options: typescriptOptions
                     }
                 ])
         }

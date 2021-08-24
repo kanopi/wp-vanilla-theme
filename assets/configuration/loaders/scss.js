@@ -1,19 +1,18 @@
 const PostCSSPresetEnv = require('postcss-preset-env');
 const Sass = require('sass');
 
-const { node } = require('../package');
-
-module.exports = (prepended_paths, prepend_variable_data, use_source_maps, resolve_import_urls) => {
-    let isSourceMapsEnabled = use_source_maps ?? true;
-    let isResolveUrlsEnabled = resolve_import_urls ?? false;
+module.exports = (kanopiPackConfig, prepend_variable_data) => {
+    let isSourceMapsEnabled = kanopiPackConfig?.sourceMaps ?? false;
+    let prependedPaths = kanopiPackConfig?.styles?.scssIncludes ?? [];
     let prependVariableData = prepend_variable_data ?? '';
+    let usePrependedPaths = Array.isArray(prependedPaths) && 0 < prependedPaths.length;
 
     let baseRules = [
         {
             loader: 'css-loader',
             options: {
                 sourceMap: isSourceMapsEnabled,
-                url: isResolveUrlsEnabled
+                url: false
             }
         },
         {
@@ -37,7 +36,7 @@ module.exports = (prepended_paths, prepend_variable_data, use_source_maps, resol
                 implementation: Sass,
                 sassOptions: {
                     includePaths: [
-                        node
+                        kanopiPackConfig?.paths?.node ?? ''
                     ],
                     linefeed: 'lf',
                     outputStyle: 'expanded',
@@ -47,11 +46,11 @@ module.exports = (prepended_paths, prepend_variable_data, use_source_maps, resol
         }
     ];
 
-    if (Array.isArray(prepended_paths) && 0 < prepended_paths.length) {
+    if (usePrependedPaths) {
         baseRules.push({
             loader: 'style-resources-loader',
             options: {
-                patterns: prepended_paths
+                patterns: prependedPaths
             }
         });
     }

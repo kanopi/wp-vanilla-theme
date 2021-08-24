@@ -116,9 +116,14 @@
 	} @else {
 		position: relative;
 	}
+	@if ($undo) {
+		left: auto;
+		position: static;
+		transform: none;
+	}
 	@if ($horizontally == true and $vertically == true) {
-		top: 50%;
 		left: 50%;
+		top: 50%;
 		transform: translateX(-50%) translateY(-50%);
 	}
 	@if ($vertically == true and $horizontally == false) {
@@ -128,11 +133,6 @@
 	@if ($horizontally == true and $vertically == false) {
 		left: 50%;
 		transform: translateX(-50%);
-	}
-	@if ($undo) {
-		position: static;
-		left: auto;
-		transform: none;
 	}
 }
 

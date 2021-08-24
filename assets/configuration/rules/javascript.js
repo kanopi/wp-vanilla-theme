@@ -1,7 +1,7 @@
 const BabelLoader = require('../loaders/babel');
 
-module.exports = (use_source_maps) => {
-    let has_source_maps = use_source_maps ?? false;
+module.exports = (kanopiPackConfig) => {
+    let has_source_maps = kanopiPackConfig?.sourceMaps ?? false;
 
     return [
         {

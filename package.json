@@ -10,8 +10,13 @@
     "build": "webpack --mode production --config ./assets/configuration/webpack.production.js",
     "development": "webpack-dev-server --mode development --config ./assets/configuration/webpack.development.js"
   },
-  "config": {
+  "kanopiPackConfig": {
     "devServerPort": 4200,
+    "entry": {
+      "customizer": "./assets/src/js/customizer.js",
+      "legacy": "./assets/src/js/legacy.js",
+      "theme": "./assets/src/scss/theme.scss"
+    },
     "scssIncludes": [
       "./assets/src/scss/shared/utilities.scss"
     ]

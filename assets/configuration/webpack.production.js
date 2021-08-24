@@ -10,10 +10,10 @@ const FileRules = require('./rules/file');
 const ScssLoaders = require('./loaders/scss');
 const TypescriptRules = require('./rules/typescript');
 
-const { distribution, scssIncludes } = require('./package');
+const kanopiPackConfig = require('./kanopi.pack');
 
 module.exports = merge(
-  common,
+  common(kanopiPackConfig),
   {
     mode: "production",
     optimization: {
@@ -24,21 +24,21 @@ module.exports = merge(
     module: {
       rules: [
         ...FileRules(),
-        ...TypescriptRules(),
+        ...TypescriptRules(kanopiPackConfig),
         {
           test: /\.(scss|sass)$/,
           use: [
             {
               loader: MiniCssExtractPlugin.loader
             },
-            ...ScssLoaders(scssIncludes)
+            ...ScssLoaders(kanopiPackConfig)
           ]
         }
       ]
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: 'css/[name].css'
+        filename: kanopiPackConfig.filePatterns.cssOutputPattern
       }),
       new CleanWebpackPlugin(),
       new AssetsPlugin({
@@ -46,7 +46,7 @@ module.exports = merge(
         includeAllFileTypes: false,
         includeManifest: "manifest",
         manifestFirst: true,
-        path: distribution,
+        path: kanopiPackConfig.paths.distribution,
         prettyPrint: true
       })
     ]
