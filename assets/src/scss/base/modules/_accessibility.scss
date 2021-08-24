@@ -1,34 +1,34 @@
 // Text meant only for screen readers.
 .screen-reader-text {
-	position: absolute !important; // sass-lint:disable-line no-important
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0;
 	border: 0;
-	overflow: hidden;
 	clip: rect(1px, 1px, 1px, 1px);
 	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important; // sass-lint:disable-line no-important
+	width: 1px;
 	word-wrap: normal !important; // sass-lint:disable-line no-important
 
 	&:focus {
-		@include font-size(.875);
-		display: block;
-		top: 5px;
-		left: 5px;
-		width: auto;
-		height: auto;
-		padding: 15px 23px 14px;
-		border-radius: 3px;
+		@include font-size(0.875);
 		background-color: $color__background-screen;
-		color: $color__text-screen;
-		font-weight: bold;
-		line-height: normal;
-		text-decoration: none;
-		box-shadow: 0 0 2px 2px rgba(0, 0, 0, .6);
-		z-index: 100000; // Above WP toolbar.
+		border-radius: 3px;
+		box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
 		clip: auto !important; // sass-lint:disable-line no-important
 		clip-path: none;
+		color: $color__text-screen;
+		display: block;
+		font-weight: bold;
+		height: auto;
+		left: 5px;
+		line-height: normal;
+		padding: 15px 23px 14px;
+		text-decoration: none;
+		top: 5px;
+		width: auto;
+		z-index: 100000; // Above WP toolbar.
 	}
 }
 
@@ -36,7 +36,6 @@
 #content { // sass-lint:disable-line no-ids
 
 	&[tabindex='-1'] {
-
 		&:focus {
 			outline: 0;
 		}

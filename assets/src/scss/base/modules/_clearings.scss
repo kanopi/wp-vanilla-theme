@@ -4,7 +4,6 @@
 .site-header,
 .site-content,
 .site-footer {
-
 	&::before,
 	&::after {
 		@include clearfix;

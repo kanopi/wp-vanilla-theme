@@ -7,14 +7,14 @@
 // Center block
 @mixin center-block {
 	display: block;
-	margin-right: auto;
 	margin-left: auto;
+	margin-right: auto;
 }
 
 // Clearfix
 @mixin clearfix {
-	display: table;
 	content: '';
+	display: table;
 	table-layout: fixed;
 }
 
@@ -43,7 +43,7 @@
 /// @param  string $timing Transition-timing-function property specifies the speed curve of the transition effect.
 /// @param  number $delay Delay the transition.
 
-@mixin transition($property: all, $duration: .2s, $timing: ease-in-out, $delay: 0s) {
+@mixin transition($property: all, $duration: 0.2s, $timing: ease-in-out, $delay: 0s) {
 	transition: $property $duration $timing $delay;
 }
 

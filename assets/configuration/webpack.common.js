@@ -96,7 +96,8 @@ module.exports = {
   },
   plugins: [
     new StyleLintPlugin({
-      configFile: path.resolve(assets, 'configuration', 'tools', '.stylelintrc')
+      configFile: path.resolve(assets, 'configuration', 'tools', '.stylelintrc'),
+      fix: true
     }),
     new CopyWebpackPlugin({
       patterns: [

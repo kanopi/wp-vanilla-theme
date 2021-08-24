@@ -2,7 +2,7 @@ button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
-	@include font-size(.75);
+	@include font-size(0.75);
 	background: $color__background-button;
 	border: 1px solid $color__border-button;
 	border-radius: 3px;

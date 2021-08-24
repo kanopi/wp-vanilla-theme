@@ -4,7 +4,7 @@
 		display: none;
 	}
 
-	&.neverending  { // Theme Footer (when set to scrolling).
+	&.neverending { // Theme Footer (when set to scrolling).
 
 		.site-footer {
 			display: none;
@@ -14,9 +14,7 @@
 
 // When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before.
 .infinity-end {
-
-	&.neverending  {
-
+	&.neverending {
 		.site-footer {
 			display: block;
 		}

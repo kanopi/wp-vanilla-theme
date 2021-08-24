@@ -1,26 +1,26 @@
 .main-navigation {
-	display: block;
-	width: 100%;
-	float: left;
 	clear: both;
+	display: block;
+	float: left;
+	width: 100%;
 
 	ul {
 		display: none;
+		list-style: none;
 		margin: 0;
 		padding-left: 0;
-		list-style: none;
 
 		ul {
+			box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+			float: left;
+			left: -999em;
 			position: absolute;
 			top: 100%;
-			left: -999em;
-			float: left;
-			box-shadow: 0 3px 3px rgba(0, 0, 0, .2);
 			z-index: 99999;
 
 			ul {
-				top: 0;
 				left: -999em;
+				top: 0;
 			}
 
 			li {
@@ -44,8 +44,8 @@
 	}
 
 	li {
-		position: relative;
 		float: left;
+		position: relative;
 	}
 
 	a {
@@ -55,7 +55,6 @@
 
 	// Small menu.
 	&.toggled {
-
 		ul {
 			display: block;
 		}
@@ -73,7 +72,6 @@
 	}
 
 	.main-navigation {
-
 		ul {
 			display: block;
 		}
@@ -83,20 +81,19 @@
 .comment-navigation,
 .posts-navigation,
 .post-navigation {
-
 	.site-main & {
 		margin: 0 0 1.5em;
 		overflow: hidden;
 	}
 
 	.nav-previous {
-		width: 50%;
 		float: left;
+		width: 50%;
 	}
 
 	.nav-next {
-		width: 50%;
 		float: right;
 		text-align: right;
+		width: 50%;
 	}
 }
