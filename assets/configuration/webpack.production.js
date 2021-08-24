@@ -1,14 +1,16 @@
 const common = require('./webpack.common.js');
 const merge = require('webpack-merge');
-const path = require('path');
 
 const AssetsPlugin = require('assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const BaseScssRules = require('./loaders/base.scss' );
 
-const { distribution, source } = require('./paths');
+const FileRules = require('./rules/file');
+const ScssLoaders = require('./loaders/scss');
+const TypescriptRules = require('./rules/typescript');
+
+const { distribution, scssIncludes } = require('./package');
 
 module.exports = merge(
   common,
@@ -21,13 +23,16 @@ module.exports = merge(
     },
     module: {
       rules: [
+        ...FileRules(),
+        ...TypescriptRules(),
         {
           test: /\.(scss|sass)$/,
           use: [
             {
               loader: MiniCssExtractPlugin.loader
-            }
-          ].concat(BaseScssRules([path.resolve(source, 'scss', 'shared', 'utilities.scss')]))
+            },
+            ...ScssLoaders(scssIncludes)
+          ]
         }
       ]
     },
@@ -37,7 +42,7 @@ module.exports = merge(
       }),
       new CleanWebpackPlugin(),
       new AssetsPlugin({
-        fileTypes: [ "js", "css" ],
+        fileTypes: ["js", "css"],
         includeAllFileTypes: false,
         includeManifest: "manifest",
         manifestFirst: true,

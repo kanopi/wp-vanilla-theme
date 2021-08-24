@@ -3,21 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const webpack = require('webpack');
 
-const { assets, distribution, source } = require('./paths');
-
-const babel_loader_options = {
-  presets: [
-    [
-      '@babel/preset-env',
-      {
-        targets: {
-          esmodules: true
-        }
-      }
-    ]
-  ],
-  sourceMaps: true
-};
+const { assets, distribution, source } = require('./package');
 
 module.exports = {
   entry: {
@@ -55,44 +41,6 @@ module.exports = {
         }
       }
     }
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(png|jpg|gif|svg|woff|woff2|ttf)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              emitFile: false
-            }
-          }
-        ]
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: babel_loader_options
-      },
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: babel_loader_options
-          },
-          {
-            loader: 'ts-loader',
-            options: {
-              appendTsSuffixTo: [/\.vue$/],
-              transpileOnly: true
-            }
-          }
-        ]
-      }
-    ]
   },
   plugins: [
     new StyleLintPlugin({

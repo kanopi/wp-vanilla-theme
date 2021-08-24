@@ -11,7 +11,10 @@
     "development": "webpack-dev-server --mode development --config ./assets/configuration/webpack.development.js"
   },
   "config": {
-    "devServerPort": 4200
+    "devServerPort": 4200,
+    "scssIncludes": [
+      "./assets/src/scss/shared/utilities.scss"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",

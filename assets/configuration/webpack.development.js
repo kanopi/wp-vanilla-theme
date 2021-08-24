@@ -1,38 +1,19 @@
 const AssetsPlugin = require('assets-webpack-plugin');
-const PostCSSPresetEnv = require('postcss-preset-env');
-const Sass = require('sass');
 const webpack = require('webpack');
 
 const common = require('./webpack.common.js');
 const merge = require('webpack-merge');
 const path = require('path');
 
-const { devServer, distribution, node, source } = require('./paths');
+const FileRules = require('./rules/file');
+const ScssLoaders = require('./loaders/scss');
+const TypescriptRules = require('./rules/typescript');
 
-let user;
-try {
-  user = require('./webpack.development.user.js');
-}
-catch ( e ) {
-  user = {};
-}
-
-let sassPrependData = `$static-files: '${devServer.host}static/';`
-  + `@import '${source}/scss/shared/utilities';`;
+const { devServer, distribution, scssIncludes } = require('./package');
 
 module.exports = merge.smart(
   common,
   {
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendor'
-          }
-        }
-      },
-    },
     output: {
       publicPath: devServer.host
     },
@@ -57,48 +38,13 @@ module.exports = merge.smart(
     },
     module: {
       rules: [
+        ...FileRules(),
+        ...TypescriptRules(),
         {
           test: /\.(scss|sass)$/,
           use: [
             'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-                url: false
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                postcssOptions: {
-                  ident: 'postcss',
-                  plugins: [
-                    PostCSSPresetEnv,
-                    {
-                      autoprefixer: { 'grid': 'autoplace' }
-                    }
-                  ],
-                  sourceMap: true
-                }
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                additionalData: sassPrependData,
-                implementation: Sass,
-                sassOptions: {
-                  includePaths: [
-                    node
-                  ],
-                  linefeed: 'lf',
-                  outputStyle: 'expanded',
-                },
-                sourceMap: true
-              }
-            },
-            
+            ...ScssLoaders(scssIncludes, `$asset_root: '${devServer.host}/';`, true)
           ]
         }
       ]
@@ -115,6 +61,5 @@ module.exports = merge.smart(
         prettyPrint: true
       })
     ]
-  },
-  user
+  }
 );

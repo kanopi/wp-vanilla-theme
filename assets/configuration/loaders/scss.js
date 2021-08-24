@@ -1,11 +1,12 @@
 const PostCSSPresetEnv = require('postcss-preset-env');
 const Sass = require('sass');
 
-const { node } = require('../paths');
+const { node } = require('../package');
 
-module.exports = (prepended_paths, use_source_maps, resolve_import_urls) => {
+module.exports = (prepended_paths, prepend_variable_data, use_source_maps, resolve_import_urls) => {
     let isSourceMapsEnabled = use_source_maps ?? true;
     let isResolveUrlsEnabled = resolve_import_urls ?? false;
+    let prependVariableData = prepend_variable_data ?? '';
 
     let baseRules = [
         {
@@ -32,6 +33,7 @@ module.exports = (prepended_paths, use_source_maps, resolve_import_urls) => {
         {
             loader: 'sass-loader',
             options: {
+                additionalData: prependVariableData,
                 implementation: Sass,
                 sassOptions: {
                     includePaths: [
