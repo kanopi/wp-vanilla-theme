@@ -6,10 +6,9 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const PostCSSPresetEnv = require("postcss-preset-env");
-const Sass = require('sass');
+const BaseScssRules = require('./loaders/base.scss' );
 
-const { distribution } = require('./paths');
+const { distribution, source } = require('./paths');
 
 module.exports = merge(
   common,
@@ -23,46 +22,12 @@ module.exports = merge(
     module: {
       rules: [
         {
-          test: /\.(scss|sass|css)$/,
+          test: /\.(scss|sass)$/,
           use: [
             {
               loader: MiniCssExtractPlugin.loader
-            },
-            {
-              loader: 'css-loader',
-              options: {
-                url: false
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                postcssOptions: {
-                  ident: 'postcss',
-                  plugins: [
-                    PostCSSPresetEnv,
-                    {
-                      autoprefixer: { 'grid': 'autoplace' }
-                    }
-                  ]
-                }
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                additionalData: '@import "./assets/src/scss/shared/utilities";',
-                implementation: Sass,
-                sassOptions: {
-                  includePaths: [
-                    path.resolve(__dirname, 'node_modules')
-                  ],
-                  linefeed: 'lf',
-                  outputStyle: 'expanded',
-                }
-              }
-            },
-          ]
+            }
+          ].concat(BaseScssRules([path.resolve(source, 'scss', 'shared', 'utilities.scss')]))
         }
       ]
     },

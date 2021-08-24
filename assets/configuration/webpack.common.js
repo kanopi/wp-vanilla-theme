@@ -1,13 +1,14 @@
-const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const webpack = require("webpack");
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const webpack = require('webpack');
 
-const { distribution, source } = require('./paths');
+const { assets, distribution, source } = require('./paths');
 
 const babel_loader_options = {
   presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
         targets: {
           esmodules: true
@@ -21,35 +22,36 @@ const babel_loader_options = {
 module.exports = {
   entry: {
     /** Apps/Scripts **/
-    //main: [path.resolve(source, "ts", "main.ts")],
+    customizer: [path.resolve(source, 'js', 'customizer.js')],
+    legacy: [path.resolve(source, 'js', 'legacy.js')],
     /** Styles **/
-    theme: [path.resolve(source, "scss", "theme.scss")],
+    theme: [path.resolve(source, 'scss', 'theme.scss')],
   },
   externals: {
     jquery: 'jQuery'
   },
   output: {
     path: distribution,
-    filename: "js/[name].js"
+    filename: 'js/[name].js'
   },
   resolve: {
-    extensions: [".ts", ".js", ".json"],
+    extensions: ['.ts', '.js', '.json'],
     alias: {
-      "@": source
+      '@': source
     }
   },
   optimization: {
-    chunkIds: "named",
-    runtimeChunk: "single",
+    chunkIds: 'named',
+    runtimeChunk: 'single',
     splitChunks: {
-      chunks: "all",
+      chunks: 'all',
       maxInitialRequests: Infinity,
       minSize: 0,
-      name: "central",
+      name: 'central',
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendor"
+          name: 'vendor'
         }
       }
     }
@@ -60,7 +62,7 @@ module.exports = {
         test: /\.(png|jpg|gif|svg|woff|woff2|ttf)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
               emitFile: false
             }
@@ -70,7 +72,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: babel_loader_options
       },
       {
@@ -78,11 +80,11 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: babel_loader_options
           },
           {
-            loader: "ts-loader",
+            loader: 'ts-loader',
             options: {
               appendTsSuffixTo: [/\.vue$/],
               transpileOnly: true
@@ -93,12 +95,15 @@ module.exports = {
     ]
   },
   plugins: [
+    new StyleLintPlugin({
+      configFile: path.resolve(assets, 'configuration', 'tools', '.stylelintrc')
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: "./assets/src/static",
-          to: "static/",
-          toType: "dir"
+          from: './assets/src/static',
+          to: 'static/',
+          toType: 'dir'
         }
       ]
     }),

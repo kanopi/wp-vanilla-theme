@@ -58,7 +58,7 @@ module.exports = merge.smart(
     module: {
       rules: [
         {
-          test: /\.(scss|sass|css)$/,
+          test: /\.(scss|sass)$/,
           use: [
             'style-loader',
             {
@@ -97,7 +97,8 @@ module.exports = merge.smart(
                 },
                 sourceMap: true
               }
-            }
+            },
+            
           ]
         }
       ]

@@ -1,0 +1,1 @@
+require('./customizer/customizer')();

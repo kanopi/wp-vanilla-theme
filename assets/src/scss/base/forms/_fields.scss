@@ -1,5 +1,4 @@
 input {
-
 	&[type='text'],
 	&[type='email'],
 	&[type='url'],
@@ -32,10 +31,10 @@ select {
 
 textarea {
 	width: 100%;
-	padding: 3px;
 	border: 1px solid $color__border-input;
 	border-radius: 3px;
 	color: $color__text-input;
+	padding: 3px;
 
 	&:focus {
 		color: $color__text-input-focus;
