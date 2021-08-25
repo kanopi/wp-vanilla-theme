@@ -16,5 +16,7 @@
       "homepage": "https://kanopi.com/"
     }
   ],
-  "require": { }
+  "require": {
+    "rleeson/wp-webpack-loader": "dev-main"
+  }
 }

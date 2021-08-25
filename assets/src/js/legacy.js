@@ -1,2 +1,2 @@
-require('./legacy/navigation')();
-require('./legacy/skip-link-focus-fix')();
+import './legacy/navigation';
+import './legacy/skip-link-focus-fix';

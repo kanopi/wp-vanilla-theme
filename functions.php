@@ -7,6 +7,15 @@
  * @package Kanopi
  */
 
+require_once(__DIR__ . '/vendor/autoload.php');
+
+/**
+ * Register Script and Style Assets
+ */
+require_once(__DIR__ . '/registration/scripts.php');
+kanopi_initialize_scripts();
+
+
 if ( ! function_exists( 'kanopi_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -115,21 +124,6 @@ function kanopi_widgets_init() {
 	) );
 }
 add_action( 'widgets_init', 'kanopi_widgets_init' );
-
-/**
- * Enqueue scripts and styles.
- */
-function kanopi_scripts() {
-	$timestamp = date( 'YmdHis' );
-
-	wp_enqueue_style( 'kanopi-style', get_template_directory_uri() . '/dist/css/style.css', [], $timestamp );
-	wp_enqueue_script( 'kanopi-navigation', get_template_directory_uri() . '/dist/js/scripts.js', [], $timestamp, true );
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
-}
-add_action( 'wp_enqueue_scripts', 'kanopi_scripts' );
 
 /**
  * Implement the Custom Header feature.

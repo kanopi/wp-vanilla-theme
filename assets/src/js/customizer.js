@@ -1,1 +1,1 @@
-require('./customizer/customizer')();
+import './customizer/customizer';
