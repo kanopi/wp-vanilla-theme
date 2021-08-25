@@ -11,15 +11,21 @@
     "development": "webpack-dev-server --mode development --config ./assets/configuration/webpack.development.js"
   },
   "kanopiPackConfig": {
-    "devServerPort": 4200,
-    "entry": {
-      "customizer": "./assets/src/js/customizer.js",
-      "legacy": "./assets/src/js/legacy.js",
-      "theme": "./assets/src/scss/theme.scss"
+    "devServer": {
+      "port": 4200
     },
-    "scssIncludes": [
-      "./assets/src/scss/shared/utilities.scss"
-    ]
+    "filePatterns": {
+      "entryPoints": {
+        "customizer": "./assets/src/js/customizer.js",
+        "legacy": "./assets/src/js/legacy.js",
+        "theme": "./assets/src/scss/theme.scss"
+      }
+    },
+    "styles": {
+      "scssIncludes": [
+        "./assets/src/scss/shared/utilities.scss"
+      ]
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
