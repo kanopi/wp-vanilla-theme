@@ -7,6 +7,7 @@
   },
   "private": true,
   "scripts": {
+    "build": "webpack --mode production --config ~kanopi-pack/configuration/webpack.production.js",
     "production": "kanopi-pack production",
     "development": "kanopi-pack development"
   },
@@ -28,14 +29,14 @@
     }
   },
   "devDependencies": {
+    "@kanopi/pack": "file:../../../../../kanopi/kanopi-pack",
     "breakpoint-sass": "^2.7.1",
-    "kanopi-pack": "file:../../../../../kanopi/kanopi-pack",
     "psi": "^4.1.0",
     "sass-toolkit": "^2.10.2",
     "webpagetest": "^0.5.0"
   },
   "engines": {
-    "node": ">=14 <16",
-    "npm": ">6.14"
+    "node": ">=12 <16",
+    "npm": ">=6.14"
   }
 }
