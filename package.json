@@ -7,9 +7,8 @@
   },
   "private": true,
   "scripts": {
-    "build": "webpack --mode production --config ~kanopi-pack/configuration/webpack.production.js",
-    "production": "kanopi-pack production",
-    "development": "kanopi-pack development"
+    "production": "kanopi-pack standard",
+    "development": "kanopi-pack standard development"
   },
   "kanopiPackConfig": {
     "devServer": {
@@ -29,7 +28,7 @@
     }
   },
   "devDependencies": {
-    "@kanopi/pack": "file:../../../../../kanopi/kanopi-pack",
+    "@kanopi/pack": "git+ssh://git@github.com/kanopi/kanopi-pack.git",
     "breakpoint-sass": "^2.7.1",
     "psi": "^4.1.0",
     "sass-toolkit": "^2.10.2",
