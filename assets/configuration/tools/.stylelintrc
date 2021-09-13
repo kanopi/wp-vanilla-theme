@@ -1,0 +1,17 @@
+{
+    'extends': 'stylelint-config-sass-guidelines',
+    'rules': {
+        'color-hex-length': 'long',
+        'indentation': 'tab',
+        'max-nesting-depth': 10,
+        'property-no-vendor-prefix': null,
+        'selector-max-compound-selectors': 5,
+        'selector-max-id': 1,
+        'selector-no-qualifying-type': null,
+        'scss/dollar-variable-pattern': '^[_]?[a-z]+([a-z0-9-_]+[a-z0-9]+)?$',
+        'scss/selector-no-redundant-nesting-selector': null
+    },
+    'ignoreFiles': [
+        '**/*.js'
+    ]
+}
