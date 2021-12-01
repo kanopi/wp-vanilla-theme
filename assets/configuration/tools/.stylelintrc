@@ -12,6 +12,7 @@
         'scss/selector-no-redundant-nesting-selector': null
     },
     'ignoreFiles': [
-        '**/*.js'
+        '**/*.js',
+        'vendor/**/*.css'
     ]
 }

@@ -15,15 +15,15 @@ body {
 }
 
 hr {
-	background-color: $color__background-hr;
-	border: 0;
 	height: 1px;
 	margin-bottom: 1.5em;
+	border: 0;
+	background-color: $color__background-hr;
 }
 
 img {
-	height: auto; // Make sure images are scaled correctly.
 	max-width: 100%; // Adhere to container width.
+	height: auto; // Make sure images are scaled correctly.
 }
 
 figure {

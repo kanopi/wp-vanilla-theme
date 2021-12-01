@@ -7,8 +7,8 @@
 // Center block
 @mixin center-block {
 	display: block;
-	margin-left: auto;
 	margin-right: auto;
+	margin-left: auto;
 }
 
 // Clearfix
@@ -117,13 +117,13 @@
 		position: relative;
 	}
 	@if ($undo) {
-		left: auto;
 		position: static;
+		left: auto;
 		transform: none;
 	}
 	@if ($horizontally == true and $vertically == true) {
-		left: 50%;
 		top: 50%;
+		left: 50%;
 		transform: translateX(-50%) translateY(-50%);
 	}
 	@if ($vertically == true and $horizontally == false) {

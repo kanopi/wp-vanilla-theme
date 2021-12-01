@@ -7,12 +7,19 @@
  * @package Kanopi
  */
 
-require_once(__DIR__ . '/vendor/autoload.php');
+// Run the autoloader to load 
+if ( !class_exists( 'WPWebpackLoader\AssetLoader' ) ) {
+	if ( !file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+		wp_die( 'Cannot find the required Kanopi Pack WordPress loader, please run composer install or otherwise load the package.' );
+	}
+
+	require_once __DIR__ . '/vendor/autoload.php';
+}
 
 /**
  * Register Script and Style Assets
  */
-require_once(__DIR__ . '/registration/scripts.php');
+require_once __DIR__ . '/registration/scripts.php';
 kanopi_initialize_scripts();
 
 

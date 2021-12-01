@@ -10,23 +10,6 @@
     "production": "kanopi-pack standard",
     "development": "kanopi-pack standard development"
   },
-  "kanopiPackConfig": {
-    "devServer": {
-      "port": 4200
-    },
-    "filePatterns": {
-      "entryPoints": {
-        "customizer": "./assets/src/js/customizer.js",
-        "legacy": "./assets/src/js/legacy.js",
-        "theme": "./assets/src/scss/theme.scss"
-      }
-    },
-    "styles": {
-      "scssIncludes": [
-        "./assets/src/scss/shared/utilities.scss"
-      ]
-    }
-  },
   "devDependencies": {
     "@kanopi/pack": "git+ssh://git@github.com/kanopi/kanopi-pack.git",
     "breakpoint-sass": "^2.7.1",

@@ -1,7 +1,7 @@
 .content-area {
-	float: right;
-	margin: 0 0 0 (-$size__site-sidebar);
 	width: $size__site-main;
+	margin: 0 0 0 (-$size__site-sidebar);
+	float: right;
 }
 
 .site-main {
@@ -10,15 +10,15 @@
 
 .site-content {
 	.widget-area {
+		width: $size__site-sidebar;
 		float: left;
 		overflow: hidden;
-		width: $size__site-sidebar;
 	}
 }
 
 .site-footer {
-	clear: both;
 	width: $size__site-main;
+	clear: both;
 }
 
 @import 'no-sidebar';
