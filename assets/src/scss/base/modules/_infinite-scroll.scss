@@ -1,0 +1,22 @@
+// Globally hidden elements when Infinite Scroll is supported and in use.
+.infinite-scroll {
+	.posts-navigation { // Older / Newer Posts Navigation (always hidden).
+		display: none;
+	}
+
+	&.neverending { // Theme Footer (when set to scrolling).
+
+		.site-footer {
+			display: none;
+		}
+	}
+}
+
+// When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before.
+.infinity-end {
+	&.neverending {
+		.site-footer {
+			display: block;
+		}
+	}
+}

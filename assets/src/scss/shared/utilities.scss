@@ -1,0 +1,11 @@
+// Asset root location, stylesheet will live in /css
+$asset_root: '../' !default;
+
+// External Libraries
+@import '~breakpoint-sass/stylesheets/breakpoint';
+@import '~sass-toolkit/stylesheets/toolkit';
+
+// Common registration of SCSS variables, functions and mixins
+@import 'functions';
+@import 'variables';
+@import 'mixins';

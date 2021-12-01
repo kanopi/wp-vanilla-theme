@@ -1,0 +1,99 @@
+.main-navigation {
+	display: block;
+	width: 100%;
+	float: left;
+	clear: both;
+
+	ul {
+		display: none;
+		margin: 0;
+		padding-left: 0;
+		list-style: none;
+
+		ul {
+			position: absolute;
+			z-index: 99999;
+			top: 100%;
+			left: -999em;
+			float: left;
+			box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+
+			ul {
+				top: 0;
+				left: -999em;
+			}
+
+			li {
+				&:hover > ul,
+				&.focus > ul {
+					left: 100%;
+				}
+			}
+
+			a {
+				width: 200px;
+			}
+		}
+
+		li {
+			&:hover > ul,
+			&.focus > ul {
+				left: auto;
+			}
+		}
+	}
+
+	li {
+		position: relative;
+		float: left;
+	}
+
+	a {
+		display: block;
+		text-decoration: none;
+	}
+
+	// Small menu.
+	&.toggled {
+		ul {
+			display: block;
+		}
+	}
+}
+
+// Small menu.
+.menu-toggle {
+	display: block;
+}
+
+@media screen and (min-width: 37.5em) {
+	.menu-toggle {
+		display: none;
+	}
+
+	.main-navigation {
+		ul {
+			display: block;
+		}
+	}
+}
+
+.comment-navigation,
+.posts-navigation,
+.post-navigation {
+	.site-main & {
+		margin: 0 0 1.5em;
+		overflow: hidden;
+	}
+
+	.nav-previous {
+		width: 50%;
+		float: left;
+	}
+
+	.nav-next {
+		width: 50%;
+		float: right;
+		text-align: right;
+	}
+}

@@ -1,80 +1,24 @@
 {
   "name": "kanopi-wordpress-starter-theme",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "repository": {
     "type": "wordpress-theme-custom",
     "url": "https://github.com/kanopi/wp-vanilla-theme"
   },
   "private": true,
   "scripts": {
-    "gulp": "gulp",
-    "gulp-watch": "gulp watch",
-    "compile": "gulp compile",
-    "clean": "gulp clean",
-    "validate": "gulp validate",
-    "watch": "gulp watch",
-    "build": "gulp build"
-  },
-  "dependencies": {
-    "lodash": "^4.17.20",
-    "moment": "^2.24.0",
-    "npm": "^6.14.8",
-    "svg4everybody": "^2.1.8"
+    "production": "kanopi-pack standard",
+    "development": "kanopi-pack standard development"
   },
   "devDependencies": {
+    "@kanopi/pack": "git+ssh://git@github.com/kanopi/kanopi-pack.git",
     "breakpoint-sass": "^2.7.1",
-    "browser-sync": "^2.26.12",
-    "compass-mixins": "^0.12.10",
-    "del": "^3.0.0",
-    "glob": "^7.1.4",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^5.0.0",
-    "gulp-cached": "^1.1.1",
-    "gulp-clean-css": "^3.9.3",
-    "gulp-concat": "^2.6.1",
-    "gulp-debug": "^4.0.0",
-    "gulp-flatten": "^0.4.0",
-    "gulp-gzip": "^1.4.2",
-    "gulp-if": "^2.0.2",
-    "gulp-imagemin": "^4.1.0",
-    "gulp-jshint": "^2.1.0",
-    "gulp-livereload": "^4.0.1",
-    "gulp-load-plugins": "^1.6.0",
-    "gulp-natural-sort": "^0.1.1",
-    "gulp-notify": "^3.2.0",
-    "gulp-plumber": "^1.2.1",
-    "gulp-postcss": "^8.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^1.0.0",
-    "gulp-sass": "^4.0.2",
-    "gulp-sass-glob": "^1.1.0",
-    "gulp-sass-lint": "^1.1.1",
-    "gulp-sizereport": "^1.2.0",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-svgstore": "^6.1.1",
-    "gulp-uglify": "^3.0.2",
-    "gulp-util": "^3.0.8",
-    "imagesloaded": "^4.1.4",
-    "jquery": "^2.2.0",
-    "js-yaml": "^3.13.1",
-    "jshint": "^2.10.2",
-    "jshint-stylish": "^2.2.1",
-    "ngrok": "^3.2.1",
-    "node-normalize-scss": "^3.0.0",
-    "node-notifier": "^5.4.0",
-    "node-sass": "^4.13.1",
-    "postcss-css-variables": "^0.13.0",
-    "psi": "^3.1.0",
-    "require-dir": "^1.2.0",
-    "run-sequence": "^2.2.1",
-    "sass-lint": "^1.13.1",
-    "sass-lint-auto-fix": "^0.21.0",
+    "psi": "^4.1.0",
     "sass-toolkit": "^2.10.2",
-    "sassdoc": "^2.7.3",
-    "sync-exec": "^0.6.2",
-    "webpagetest": "^0.4.0"
-  }
+    "webpagetest": "^0.5.0"
+  },
   "engines": {
-    "node": ">=10 <16"
+    "node": ">=12 <16",
+    "npm": ">=6.14"
   }
 }
